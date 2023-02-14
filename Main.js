@@ -14,6 +14,10 @@ class Calculator {
   }
 
   append(number) {
+    if(this.operator===null)
+    {
+      this.clear()
+    }
     if (this.currentOperand.includes('.') && number === '.') return;
     this.currentOperand = this.currentOperand.toString() + number.toString()
   }
@@ -53,8 +57,8 @@ class Calculator {
       default:
         return
     }
-    this.currentOperand = computation
-    this.operator = undefined
+    this.currentOperand = computation.toString()
+    this.operator = null
     this.previousOperand = ''
   }
 
@@ -83,7 +87,7 @@ class Calculator {
 
   updatedisplay() {
     this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand)
-    if (this.operator !== undefined) {
+    if (!!this.operator) {
       this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operator}`
     }
     else{
